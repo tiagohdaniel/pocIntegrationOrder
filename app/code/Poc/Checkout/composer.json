@@ -1,0 +1,22 @@
+{
+    "name": "poc/module-checkout",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "tiagohdaniel@gmail.com",
+            "name": "Tiago Daniel"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Poc\\Checkout\\": ""
+        }
+    }
+}
