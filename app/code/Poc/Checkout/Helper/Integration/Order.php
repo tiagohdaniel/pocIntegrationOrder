@@ -67,7 +67,6 @@ class Order extends AbstractHelper
             $this->_logger->error($exception->getMessage());
             return false;
         }
-
     }
 
     /**
@@ -83,12 +82,21 @@ class Order extends AbstractHelper
         /** @var \Magento\Sales\Model\Order\Address $billingAddress */
         $shippingAddress = $order->getShippingAddress();
 
-        $postData['customer'] = [
-            'cnpj'         => $order->getCustomerTaxvat(),
-            'razao_social' => $order->getCustomerFirstname(),
-            'telephone'    => $shippingAddress->getTelephone(),
-            'dob'          => $order->getCustomerDob()
-        ];
+        if ($order->getCustomerCnpj()) {
+            $postData['customer'] = [
+                'cnpj'         => $order->getCustomerCnpj(),
+                'razao_social' => $order->getCustomerFirstname(),
+                'telephone'    => $shippingAddress->getTelephone(),
+                'ie'           => $order->getCustomerIe()
+            ];
+        } elseif ($order->getCustomerCpf()) {
+            $postData['customer'] = [
+                'cpf'       => $order->getCustomerCpf(),
+                'name'      => $order->getCustomerFirstname(),
+                'telephone' => $shippingAddress->getTelephone(),
+                'dob'       => $order->getCustomerDob()
+            ];
+        }
 
         $postData['shippingAddress'] = [
             'street'        => $shippingAddress->getStreetLine(1),

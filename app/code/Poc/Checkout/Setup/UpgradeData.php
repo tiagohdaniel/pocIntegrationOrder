@@ -20,11 +20,14 @@ class UpgradeData implements UpgradeDataInterface
     {
         // Upgrade 1.0.0
         $this->_upgrade_1_0_0($setup, $context);
+
+        // Upgrade 1.0.1
+        $this->_upgrade_1_0_1($setup, $context);
     }
 
     public function _upgrade_1_0_0(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '1.0.0', '>=')) {
+        if (version_compare($context->getVersion(), '1.0.0', '<')) {
             return false;
         }
 
@@ -81,5 +84,127 @@ class UpgradeData implements UpgradeDataInterface
                 'apply_to' => '',
                 'attribute_set' => 'default'
             ]);
+    }
+
+    public function _upgrade_1_0_1(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    {
+        if (version_compare($context->getVersion(), '1.0.1', '<')) {
+            $eavSetup = $this->eavSetupFactory->create([ 'setup' => $setup ]);
+
+            $eavSetup->addAttribute(
+                \Magento\Customer\Model\Customer::ENTITY,
+                'cnpj',
+                [
+                    'type' => 'varchar',
+                    'backend' => '',
+                    'frontend' => '',
+                    'frontend_class' => '',
+                    'label' => 'CNPJ',
+                    'input' => 'text',
+                    'class' => '',
+                    'source' => '',
+                    'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => true,
+                    'user_defined' => true,
+                    'group' => '',
+                    'default' => 0,
+                    'searchable' => true,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => false,
+                    'used_in_product_listing' => true,
+                    'unique' => false,
+                    'apply_to' => '',
+                    'attribute_set' => 'default'
+                ]);
+
+            $eavSetup->addAttribute(
+                \Magento\Customer\Model\Customer::ENTITY,
+                'cpf',
+                [
+                    'type' => 'varchar',
+                    'backend' => '',
+                    'frontend' => '',
+                    'frontend_class' => '',
+                    'label' => 'CPF',
+                    'input' => 'text',
+                    'class' => '',
+                    'source' => '',
+                    'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => true,
+                    'user_defined' => true,
+                    'group' => '',
+                    'default' => 0,
+                    'searchable' => true,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => false,
+                    'used_in_product_listing' => true,
+                    'unique' => false,
+                    'apply_to' => '',
+                    'attribute_set' => 'default'
+                ]);
+
+            $eavSetup->addAttribute(
+                \Magento\Customer\Model\Customer::ENTITY,
+                'social_name',
+                [
+                    'type' => 'varchar',
+                    'backend' => '',
+                    'frontend' => '',
+                    'frontend_class' => '',
+                    'label' => 'Social Name',
+                    'input' => 'text',
+                    'class' => '',
+                    'source' => '',
+                    'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => true,
+                    'user_defined' => true,
+                    'group' => '',
+                    'default' => 0,
+                    'searchable' => true,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => false,
+                    'used_in_product_listing' => true,
+                    'unique' => false,
+                    'apply_to' => '',
+                    'attribute_set' => 'default'
+                ]);
+
+            $eavSetup->addAttribute(
+                \Magento\Customer\Model\Customer::ENTITY,
+                'ie',
+                [
+                    'type' => 'varchar',
+                    'backend' => '',
+                    'frontend' => '',
+                    'frontend_class' => '',
+                    'label' => 'Social Inscription',
+                    'input' => 'text',
+                    'class' => '',
+                    'source' => '',
+                    'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => true,
+                    'user_defined' => true,
+                    'group' => '',
+                    'default' => 0,
+                    'searchable' => true,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => false,
+                    'used_in_product_listing' => true,
+                    'unique' => false,
+                    'apply_to' => '',
+                    'attribute_set' => 'default'
+                ]);
+
+            $setup->endSetup();
+
+        }
     }
 }
