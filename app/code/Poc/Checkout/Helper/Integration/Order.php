@@ -81,9 +81,10 @@ class Order extends AbstractHelper
         $shippingAddress = $order->getShippingAddress();
 
         $postData['customer'] = [
-            'cnpj'                 => $order->getCustomerTaxvat(),
-            'razao_social'         => $order->getCustomerFirstname(),
-            'telephone'    => $shippingAddress->getTelephone()
+            'cnpj'         => $order->getCustomerTaxvat(),
+            'razao_social' => $order->getCustomerFirstname(),
+            'telephone'    => $shippingAddress->getTelephone(),
+            'dob'          => $order->getCustomerDob()
         ];
 
         $postData['shippingAddress'] = [
