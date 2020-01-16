@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
 	<default>
-		<sales_order>
+		<poccheckout>
 			<integration>
 				<active>1</active>
 				<key>4pfz9h3wkbcdhy0dksnanmtrv95l3nxz</key>
 				<endpoint>/webhook/sales</endpoint>
 			</integration>
-		</sales_order>
+		</poccheckout>
 	</default>
 </config>

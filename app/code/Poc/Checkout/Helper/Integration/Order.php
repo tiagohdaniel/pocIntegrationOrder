@@ -9,6 +9,9 @@ class Order extends AbstractHelper
     /** @var \Psr\Log\LoggerInterface $_logger */
     protected $_logger;
 
+    /** @var string  */
+    const XML_PATH_POCCHECKOUT = 'poccheckout/';
+
     /**
      * Data constructor.
      * @param \Magento\Framework\App\Helper\Context $context
@@ -29,7 +32,7 @@ class Order extends AbstractHelper
      */
     private function _getToken()
     {
-        return $this->getConfig('sales_order/integration/key');
+        return $this->getGeneralConfig('key');
     }
 
     /**
@@ -49,7 +52,7 @@ class Order extends AbstractHelper
                 'Authorization:Bearer '. $this->_getToken()
             ]
         );
-        $client->setUri($this->getConfig('sales_order/integration/endpoint'));
+        $client->setUri($this->getGeneralConfig('endpoint'));
         $client->setMethod('POST');
         $client->setHeaders('Content-Type', 'application/json');
         $jsonData = \Zend_Json::encode($data);
@@ -128,7 +131,6 @@ class Order extends AbstractHelper
         return $postData;
     }
 
-
     /**
      * @param $configPath
      * @return mixed
@@ -139,6 +141,16 @@ class Order extends AbstractHelper
             $configPath,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * @param $code
+     * @param null $storeId
+     * @return mixed
+     */
+    public function getGeneralConfig($code, $storeId = null)
+    {
+        return $this->getConfig(self::XML_PATH_POCCHECKOUT .'integration/'. $code, $storeId);
     }
 
 }
